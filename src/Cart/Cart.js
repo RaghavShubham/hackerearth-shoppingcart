@@ -9,6 +9,18 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
 export default function Cart() {
+  const [data, setData] = React.useState([]);
+  const [boxData, setBoxData] = React.useState({
+    items: data.length,
+    price: 0,
+    discount: 0,
+    typeDiscount: 0,
+    orderTotal: 0
+  })
+  React.useEffect(() => {
+    setData(Data);
+  },[])
+  console.log(data);
   return (
     <div className="body">
       <div className="nav">
@@ -18,17 +30,26 @@ export default function Cart() {
       <div className="lowerBody">
         <div className="list">
           <div className="thead">
-            <p className="headItem">Items({Data.length})</p>
+            <p className="headItem">Items({data.length})</p>
             <p className="headQty">Qty</p>
             <p className="headPrice">Price</p>
           </div>
-          {Data.map((item) => (
-            <div style={{ alignItems: "center", display: "flex" }} id={item.id}>
+          {data.map((item) => { 
+            setBoxData(prev => ({
+              ...prev,
+              items: boxData.items + 1,
+              price: boxData.price + item.price,
+              discount: boxData.discount + (item.price * item.discount/100),
+              typeDiscount: boxData.typeDiscount + item.type === "fiction" ? item.price * 0.15 : 0,
+              orderTotal: boxData.price - boxData.discount - boxData.typeDiscount
+            }))
+            return(
+            <div style={{ alignItems: "center", display: "flex" }} key={item.id}>
               <Item item={item} />
               <div className="counter">
                 <IconButton
                   aria-label="remove"
-                  color="black"
+                  color="default"
                   onClick={() => console.log("hi")}
                 >
                   <RemoveIcon />
@@ -38,7 +59,7 @@ export default function Cart() {
                 </div>
                 <IconButton
                   aria-label="add"
-                  color="black"
+                  color="default"
                   onClick={() => console.log("hi")}
                 >
                   <AddIcon />
@@ -51,9 +72,9 @@ export default function Cart() {
                 {"$" + item.price}
               </p>
             </div>
-          ))}
+          )})}
         </div>
-        <Box Data={Data} />
+        <Box Data={boxData} />
       </div>
     </div>
   );

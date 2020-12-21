@@ -13,7 +13,7 @@ export default function Item({ item }) {
         />
         <p style={{ margin: "0px 10px" }}>{item.name}</p>
       </div>
-      <IconButton aria-label="delete" color="black" onClick={() => console.log("hi")}>
+      <IconButton aria-label="delete" color="default" onClick={() => console.log("hi")}>
         <ClearIcon />
       </IconButton>
     </div>
