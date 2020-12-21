@@ -1,0 +1,159 @@
+.body {
+    margin: 0% 3%;
+    font-family: "Roboto";
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.nav {
+    display: inline-flex;
+    width: 70%;
+    align-items: center;
+}
+
+.lowerBody {
+    display: flex;
+    flex-direction: row;
+}
+
+.list {
+    width: 70%;
+}
+
+.thead {
+    width: 100%;
+    display: inline-flex;
+    border-top: 1px solid rgb(66, 66, 66);
+    border-bottom: 1px solid rgb(66, 66, 66);
+    margin: 0% 0% 2%;
+}
+
+.headItem {
+    width: 70%;
+}
+
+.headQty {
+    width: 20%;
+    text-align: center;
+}
+
+.headPrice {
+    width: 10%;
+    text-align: center;
+}
+
+.item {
+    border: 1px solid rgb(100, 100, 100);
+    display: inline-flex;
+    width: 69%;
+    padding: 5px;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.qty {
+    display: flex;
+    height: 58px;
+    min-width: 56px !important;
+    border: 1px solid rgb(83, 83, 83);
+    justify-content: center;
+    align-items: center;
+    margin: 0% 4%;
+}
+
+.counter {
+    width: 20% ;
+    display: inline-flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.box {
+    width: 300px;
+    max-height: 165px !important;
+    padding: 15px 15px 0px;
+    border: 1px solid rgb(119, 119, 119);
+    margin-left: 3%;
+}
+
+.word {
+    width: 70%;
+}
+
+.cost {
+    width: 25%;
+    text-align: end;
+}
+
+.total {
+    font-weight: 500;
+    width: 300px !important;
+    margin-top: 10px;
+    margin-left: -15px;
+    margin-bottom: 0;
+    padding: 20px 15px;
+    display: inline-flex;
+    justify-content: space-between;
+    background-color: rgb(223, 223, 223);
+}
+
+.box p{
+    margin: 0;
+}
+
+@media screen and (max-width: 1280px) and (min-width: 980px){
+    .counter {
+        width: 35%;
+    }
+    .item {
+        width: 55%;
+    }
+    .headItem {
+        width: 56%;
+    }
+    .headQty {
+        width: 34%;
+    }
+}
+
+@media screen and (max-width: 980px){
+    .lowerBody {
+        flex-direction: column-reverse;
+    }
+    .counter {
+        width: 50%;
+    }
+    .item {
+        width: 40%;
+    }
+    .headItem {
+        width: 41%;
+    }
+    .headQty {
+        width: 49%;
+    }
+    .box {
+        margin: 0px auto;
+    }
+    .body {
+        margin: 0 auto;
+    }
+    .list {
+        width: 100%;
+    }
+    .item {
+        padding: 3px;
+    }
+    MuiIconButton-root {
+        padding: 6px !important;
+    }
+    .qty {
+        height: 56px;
+        width: 56px !important;
+        margin: 0%;
+    }
+    .thead {
+        margin: 3% 0;
+    }
+}
