@@ -4,7 +4,8 @@ import ClearIcon from "@material-ui/icons/Clear";
 import { REMOVE_ITEM } from "../redux/actions";
 import { connect } from "react-redux";
 
-function Item({ items, index, removeProduct }) {
+function Item({ items, index, removeProduct, setOpen }) {
+  
   return (
     <div className="item">
       <div style={{ display: "inline-flex", alignItems: "center" }}>
@@ -18,7 +19,10 @@ function Item({ items, index, removeProduct }) {
       <IconButton
         aria-label="delete"
         color="default"
-        onClick={() => removeProduct(items[index].id)}
+        onClick={() => {
+          removeProduct(items[index].id);
+          setOpen(true);
+        }}
       >
         <ClearIcon />
       </IconButton>

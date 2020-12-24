@@ -8,9 +8,19 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import * as actions from "../redux/actions";
 import { connect } from "react-redux";
-import { Button } from "@material-ui/core";
+import { Button, Snackbar } from "@material-ui/core";
 
 function Cart({ increase, decrease, items, addProduct }) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   return (
     <div className="body">
       <div className="nav">
@@ -30,7 +40,7 @@ function Cart({ increase, decrease, items, addProduct }) {
                 style={{ alignItems: "center", display: "flex" }}
                 key={item.id}
               >
-                <Item index={index} />
+                <Item index={index} setOpen={setOpen} />
                 <div className="counter">
                   <IconButton
                     aria-label="remove"
@@ -65,12 +75,23 @@ function Cart({ increase, decrease, items, addProduct }) {
               </div>
             ))
           ) : (
-            <Button variant="outlined" style={{margin: "auto"}} onClick={() => addProduct()}>
+            <Button
+              variant="outlined"
+              style={{ margin: "auto" }}
+              onClick={() => addProduct()}
+            >
               Reset
             </Button>
           )}
         </div>
         <Box />
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          autoHideDuration={1000}
+          open={open}
+          onClose={handleClose}
+          message="Item Removed from Cart"
+        ></Snackbar>
       </div>
     </div>
   );
