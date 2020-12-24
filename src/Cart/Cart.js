@@ -1,26 +1,15 @@
 import React from "react";
 import Box from "../Components/Box";
 import Item from "../Components/Item";
-import Data from "../Data/data";
 import "./Cart.css";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import * as actions from '../redux/actions';
+import { connect } from "react-redux";
 
-export default function Cart() {
-  const [data, setData] = React.useState([]);
-  const [boxData, setBoxData] = React.useState({
-    items: data.length,
-    price: 0,
-    discount: 0,
-    typeDiscount: 0,
-    orderTotal: 0
-  })
-  React.useEffect(() => {
-    setData(Data);
-  },[])
-  console.log(data);
+function Cart({ increase, decrease, items }) {  
   return (
     <div className="body">
       <div className="nav">
@@ -30,37 +19,28 @@ export default function Cart() {
       <div className="lowerBody">
         <div className="list">
           <div className="thead">
-            <p className="headItem">Items({data.length})</p>
+            <p className="headItem">Items({items.length})</p>
             <p className="headQty">Qty</p>
             <p className="headPrice">Price</p>
           </div>
-          {data.map((item) => { 
-            setBoxData(prev => ({
-              ...prev,
-              items: boxData.items + 1,
-              price: boxData.price + item.price,
-              discount: boxData.discount + (item.price * item.discount/100),
-              typeDiscount: boxData.typeDiscount + item.type === "fiction" ? item.price * 0.15 : 0,
-              orderTotal: boxData.price - boxData.discount - boxData.typeDiscount
-            }))
-            return(
+          {items.map((item, index) => (
             <div style={{ alignItems: "center", display: "flex" }} key={item.id}>
-              <Item item={item} />
+              <Item index={index} />
               <div className="counter">
                 <IconButton
                   aria-label="remove"
                   color="default"
-                  onClick={() => console.log("hi")}
+                  onClick={() => item.quantity > 1 && decrease(item.id)}
                 >
                   <RemoveIcon />
                 </IconButton>
                 <div className="qty">
-                  <p style={{ margin: "0px", fontWeight: "500" }}>111</p>
+                  <p style={{ margin: "0px", fontWeight: "500" }}>{item.quantity}</p>
                 </div>
                 <IconButton
                   aria-label="add"
                   color="default"
-                  onClick={() => console.log("hi")}
+                  onClick={() => increase(item.id)}
                 >
                   <AddIcon />
                 </IconButton>
@@ -72,10 +52,27 @@ export default function Cart() {
                 {"$" + item.price}
               </p>
             </div>
-          )})}
+          ))}
         </div>
-        <Box Data={boxData} />
+        <Box />
       </div>
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  items: state.items,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  increase: (id) => dispatch({ type: actions.INCREASE, id }),
+
+  addProduct: (item) => dispatch({ type: actions.ADD_ITEM, item }),
+
+  decrease: (id) => dispatch({ type: actions.DECREASE, id }),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);

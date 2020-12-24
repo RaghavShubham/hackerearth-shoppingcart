@@ -1,6 +1,7 @@
-const Data = [
+const ItemData = [
   {
     id: 9090,
+    quantity: 1,
     name: "Item1",
     price: 200,
     discount: 10,
@@ -9,6 +10,7 @@ const Data = [
   },
   {
     id: 9091,
+    quantity: 1,
     name: "Item2",
     price: 250,
     discount: 15,
@@ -16,6 +18,7 @@ const Data = [
     img_url: "https://place-hold.it/40.jpg",
   },
   {
+    quantity: 1,
     id: 9092,
     name: "Item3",
     price: 320,
@@ -24,6 +27,7 @@ const Data = [
     img_url: "https://place-hold.it/40.jpg",
   },
   {
+    quantity: 1,
     id: 9093,
     name: "Item4",
     price: 290,
@@ -32,6 +36,7 @@ const Data = [
     img_url: "https://place-hold.it/40.jpg",
   },
   {
+    quantity: 1,
     id: 9094,
     name: "Item5",
     price: 500,
@@ -40,6 +45,7 @@ const Data = [
     img_url: "https://place-hold.it/40.jpg",
   },
   {
+    quantity: 1,
     id: 9095,
     name: "Item6",
     price: 150,
@@ -48,6 +54,7 @@ const Data = [
     img_url: "https://place-hold.it/40.jpg",
   },
   {
+    quantity: 1,
     id: 9096,
     name: "Item7",
     price: 700,
@@ -56,6 +63,7 @@ const Data = [
     img_url: "https://place-hold.it/40.jpg",
   },
   {
+    quantity: 1,
     id: 9097,
     name: "Item8",
     price: 350,
@@ -65,4 +73,4 @@ const Data = [
   },
 ];
 
-export default Data;
+export default ItemData;
