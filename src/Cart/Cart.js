@@ -6,10 +6,11 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
-import * as actions from '../redux/actions';
+import * as actions from "../redux/actions";
 import { connect } from "react-redux";
+import { Button } from "@material-ui/core";
 
-function Cart({ increase, decrease, items }) {  
+function Cart({ increase, decrease, items, addProduct }) {
   return (
     <div className="body">
       <div className="nav">
@@ -23,36 +24,51 @@ function Cart({ increase, decrease, items }) {
             <p className="headQty">Qty</p>
             <p className="headPrice">Price</p>
           </div>
-          {items.map((item, index) => (
-            <div style={{ alignItems: "center", display: "flex" }} key={item.id}>
-              <Item index={index} />
-              <div className="counter">
-                <IconButton
-                  aria-label="remove"
-                  color="default"
-                  onClick={() => item.quantity > 1 && decrease(item.id)}
-                >
-                  <RemoveIcon />
-                </IconButton>
-                <div className="qty">
-                  <p style={{ margin: "0px", fontWeight: "500" }}>{item.quantity}</p>
-                </div>
-                <IconButton
-                  aria-label="add"
-                  color="default"
-                  onClick={() => increase(item.id)}
-                >
-                  <AddIcon />
-                </IconButton>
-              </div>
-
-              <p
-                style={{ width: "10%", textAlign: "center", fontWeight: "500" }}
+          {items.length ? (
+            items.map((item, index) => (
+              <div
+                style={{ alignItems: "center", display: "flex" }}
+                key={item.id}
               >
-                {"$" + item.price}
-              </p>
-            </div>
-          ))}
+                <Item index={index} />
+                <div className="counter">
+                  <IconButton
+                    aria-label="remove"
+                    color="default"
+                    onClick={() => item.quantity > 1 && decrease(item.id)}
+                  >
+                    <RemoveIcon />
+                  </IconButton>
+                  <div className="qty">
+                    <p style={{ margin: "0px", fontWeight: "500" }}>
+                      {item.quantity}
+                    </p>
+                  </div>
+                  <IconButton
+                    aria-label="add"
+                    color="default"
+                    onClick={() => increase(item.id)}
+                  >
+                    <AddIcon />
+                  </IconButton>
+                </div>
+
+                <p
+                  style={{
+                    width: "10%",
+                    textAlign: "center",
+                    fontWeight: "500",
+                  }}
+                >
+                  {"$" + item.price}
+                </p>
+              </div>
+            ))
+          ) : (
+            <Button variant="outlined" style={{margin: "auto"}} onClick={() => addProduct()}>
+              Reset
+            </Button>
+          )}
         </div>
         <Box />
       </div>
@@ -72,7 +88,4 @@ const mapDispatchToProps = (dispatch) => ({
   decrease: (id) => dispatch({ type: actions.DECREASE, id }),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

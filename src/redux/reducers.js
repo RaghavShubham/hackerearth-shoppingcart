@@ -27,13 +27,10 @@ const getInitialState = () => ({
 export const CartReducers = (state = getInitialState(), action) => {
   switch (action.type) {
     case ADD_ITEM:
-      if (!state.items.find((item) => item.id === action.item.id)) {
-        state.items.push({
-          ...action.item,
-          quantity: 1,
-        });
+      return {
+        ...state,
+        ...getInitialState()
       }
-      break;
     case REMOVE_ITEM:
       return {
         ...state,
