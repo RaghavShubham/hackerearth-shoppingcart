@@ -9,17 +9,21 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import * as actions from "../redux/actions";
 import { connect } from "react-redux";
 import { Button, Snackbar } from "@material-ui/core";
+import ItemData from "../Data/data";
 
-function Cart({ increase, decrease, items, addProduct }) {
+function Cart({ increase, decrease, items, addProduct, reset }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
+
+  const handleReload = () => {
+    ItemData.map((item) => addProduct(item))
+  }
 
   return (
     <div className="body">
@@ -77,10 +81,9 @@ function Cart({ increase, decrease, items, addProduct }) {
           ) : (
             <Button
               variant="outlined"
-              style={{ margin: "auto" }}
-              onClick={() => addProduct()}
+              onClick={handleReload}
             >
-              Reset
+              Reload
             </Button>
           )}
         </div>

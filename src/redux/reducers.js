@@ -19,18 +19,22 @@ export const Sum = (items) => {
   return { itemCount, total, discount, typeDiscount };
 };
 
-const getInitialState = () => ({
+const InitialState = {
   items: Data,
-  ...Sum(Data)
-})
+  ...Sum(Data),
+};
 
-export const CartReducers = (state = getInitialState(), action) => {
+export const CartReducers = (state = InitialState, action) => {
   switch (action.type) {
     case ADD_ITEM:
-      return {
-        ...state,
-        ...getInitialState()
-      }
+      return Object.assign({}, state, {
+        items: state.items.concat({
+          ...action.item,
+          quantity: 1,
+        }),
+        ...Sum(Data)
+      });
+
     case REMOVE_ITEM:
       return {
         ...state,
